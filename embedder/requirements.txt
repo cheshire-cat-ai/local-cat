@@ -1,0 +1,5 @@
+fastapi
+pydantic
+numpy
+uvicorn
+fastembed
