@@ -29,7 +29,7 @@ def submit_prompt(body_json: Prompt):
     if not hasattr(app.state, "embedding_model"):
         raise HTTPException(status_code=500, detail="Embedding model not loaded yet.")
     prompt_before = body_json.prompt
-    embeddings: List[np.ndarray] = list(app.state.embedding_model.passage_embed(prompt_before)) # notice that we are casting the generator to a list 
+    embeddings: List[np.ndarray] = list(app.state.embedding_model.query_embed(prompt_before)) # notice that we are casting the generator to a list 
     embeddings = [embedding.tolist() for embedding in embeddings]
     return embeddings[0]
 
