@@ -40,7 +40,7 @@ services:
     restart: unless-stopped
 
   cheshire-cat-vector-memory:
-    image: qdrant/qdrant:latest
+    image: qdrant/qdrant:v1.6.1
     container_name: cheshire_cat_vector_memory
     expose:
       - 6333
@@ -50,7 +50,7 @@ services:
 
   ollama:
     container_name: ollama_cat
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.1.9
     volumes:
       - ./ollama:/root/.ollama
     expose:
