@@ -7,8 +7,9 @@ A ready to use 100% local setup for Cat + Ollama + Embedder + Qdrant
 
 # Double command setup
 1. clone the repo: `git clone https://github.com/cheshire-cat-ai/local-cat.git`
-2. Build the cat: `docker-compose up`
-3. Pull the desired model from ollama library: `docker exec ollama_cat ollama pull <model_name:tags>`
+2. cd `cd local-cat`
+3. Build the cat: `docker-compose up`
+4. Pull the desired model from ollama library: `docker exec ollama_cat ollama pull <model_name:tags>`
 
 
 ---
