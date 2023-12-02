@@ -1,0 +1,47 @@
+{
+    "_default": {
+        "1": {
+            "name": "LLMOllamaConfig",
+            "value": {
+                "base_url": "http://ollama:11434",
+                "model": "llama2",
+                "num_ctx": 4096,
+                "repeat_last_n": 64,
+                "repeat_penalty": 1.1,
+                "temperature": 0.7
+            },
+            "category": "llm_factory",
+            "setting_id": "d1eb9111-cd37-482a-87fe-ea64c305aa3a",
+            "updated_at": 1701488628
+        },
+        "2": {
+            "name": "llm_selected",
+            "value": {
+                "name": "LLMOllamaConfig"
+            },
+            "category": "llm",
+            "setting_id": "bb46af1b-c664-4620-97c1-e9d3aa787e4d",
+            "updated_at": 1701488628
+        },
+        "3": {
+            "name": "EmbedderQdrantFastEmbedConfig",
+            "value": {
+                "model_name": "BAAI/bge-base-en",
+                "max_length": 512,
+                "doc_embed_type": "passage"
+            },
+            "category": "embedder_factory",
+            "setting_id": "ca19db70-c161-4ba2-9669-f4cff9913469",
+            "updated_at": 1701488624
+        },
+        "4": {
+            "name": "embedder_selected",
+            "value": {
+                "name": "EmbedderQdrantFastEmbedConfig"
+            },
+            "category": "embedder",
+            "setting_id": "2102f79a-c211-4c3f-a8b0-cadff04bc2b9",
+            "updated_at": 1701488624
+        }
+    }
+}
