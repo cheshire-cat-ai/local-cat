@@ -40,7 +40,7 @@ services:
 
   ollama:
     container_name: ollama_cat
-    image: ollama/ollama:0.1.9
+    image: ollama/ollama:0.1.20
     volumes:
       - ./ollama:/root/.ollama
     expose:
