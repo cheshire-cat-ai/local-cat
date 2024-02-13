@@ -2,31 +2,31 @@ version: '3.7'
 
 services:
   cheshire-cat-core:
-      image: ghcr.io/cheshire-cat-ai/core:latest
-      container_name: cheshire_cat_core
-      depends_on:
-        - cheshire-cat-vector-memory
-        - ollama
-      environment:
-        - PYTHONUNBUFFERED=1
-        - WATCHFILES_FORCE_POLLING=true
-        - CORE_HOST=${CORE_HOST:-localhost}
-        - CORE_PORT=${CORE_PORT:-1865}
-        - QDRANT_HOST=${QDRANT_HOST:-cheshire_cat_vector_memory}
-        - QDRANT_PORT=${QDRANT_PORT:-6333}
-        - CORE_USE_SECURE_PROTOCOLS=${CORE_USE_SECURE_PROTOCOLS:-}
-        - API_KEY=${API_KEY:-}
-        - LOG_LEVEL=${LOG_LEVEL:-WARNING}
-        - DEBUG=${DEBUG:-true}
-        - SAVE_MEMORY_SNAPSHOTS=${SAVE_MEMORY_SNAPSHOTS:-false}
-      ports:
-        - ${CORE_PORT:-1865}:80
-      volumes:
-        - ./cat/static:/app/cat/static
-        - ./cat/plugins:/app/cat/plugins
-        - ./cat/data:/app/cat/data
-        - ./cat/embedder:/app/local_cache
-      restart: unless-stopped
+    image: ghcr.io/cheshire-cat-ai/core:latest
+    container_name: cheshire_cat_core
+    depends_on:
+      - cheshire-cat-vector-memory
+      - ollama
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WATCHFILES_FORCE_POLLING=true
+      - CORE_HOST=${CORE_HOST:-localhost}
+      - CORE_PORT=${CORE_PORT:-1865}
+      - QDRANT_HOST=${QDRANT_HOST:-cheshire_cat_vector_memory}
+      - QDRANT_PORT=${QDRANT_PORT:-6333}
+      - CORE_USE_SECURE_PROTOCOLS=${CORE_USE_SECURE_PROTOCOLS:-}
+      - API_KEY=${API_KEY:-}
+      - LOG_LEVEL=${LOG_LEVEL:-WARNING}
+      - DEBUG=${DEBUG:-true}
+      - SAVE_MEMORY_SNAPSHOTS=${SAVE_MEMORY_SNAPSHOTS:-false}
+    ports:
+      - ${CORE_PORT:-1865}:80
+    volumes:
+      - ./cat/static:/app/cat/static
+      - ./cat/plugins:/app/cat/plugins
+      - ./cat/data:/app/cat/data
+      - ./cat/embedder:/app/local_cache
+    restart: unless-stopped
 
 
   cheshire-cat-vector-memory:
