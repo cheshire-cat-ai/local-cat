@@ -1,47 +1,48 @@
 {
     "_default": {
         "1": {
-            "name": "LLMOllamaConfig",
-            "value": {
-                "base_url": "http://ollama:11434",
-                "model": "llama2",
-                "num_ctx": 4096,
-                "repeat_last_n": 64,
-                "repeat_penalty": 1.1,
-                "temperature": 0.7
-            },
-            "category": "llm_factory",
-            "setting_id": "d1eb9111-cd37-482a-87fe-ea64c305aa3a",
-            "updated_at": 1701488628
-        },
-        "2": {
-            "name": "llm_selected",
-            "value": {
-                "name": "LLMOllamaConfig"
-            },
-            "category": "llm",
-            "setting_id": "bb46af1b-c664-4620-97c1-e9d3aa787e4d",
-            "updated_at": 1701488628
-        },
-        "3": {
             "name": "EmbedderQdrantFastEmbedConfig",
             "value": {
-                "model_name": "BAAI/bge-base-en",
+                "model_name": "BAAI/bge-large-en-v1.5-quantized",
                 "max_length": 512,
-                "doc_embed_type": "passage"
+                "doc_embed_type": "passage",
+                "cache_dir": "cat/data/models/fast_embed"
             },
             "category": "embedder_factory",
-            "setting_id": "ca19db70-c161-4ba2-9669-f4cff9913469",
-            "updated_at": 1701488624
+            "setting_id": "805d0bd5-b256-4fc8-9935-25960e3793bc",
+            "updated_at": 1709928305
         },
-        "4": {
+        "2": {
             "name": "embedder_selected",
             "value": {
                 "name": "EmbedderQdrantFastEmbedConfig"
             },
             "category": "embedder",
-            "setting_id": "2102f79a-c211-4c3f-a8b0-cadff04bc2b9",
-            "updated_at": 1701488624
+            "setting_id": "7363b55d-ec31-42ce-be99-f9f2e6e189c6",
+            "updated_at": 1709928305
+        },
+        "3": {
+            "name": "LLMOllamaConfig",
+            "value": {
+                "base_url": "http://ollama:11434",
+                "model": "llama2",
+                "num_ctx": 2048,
+                "repeat_last_n": 64,
+                "repeat_penalty": 1.1,
+                "temperature": 0.8
+            },
+            "category": "llm_factory",
+            "setting_id": "f0a0ef0a-6770-4a6e-aa90-e4812a674971",
+            "updated_at": 1709928807
+        },
+        "4": {
+            "name": "llm_selected",
+            "value": {
+                "name": "LLMOllamaConfig"
+            },
+            "category": "llm",
+            "setting_id": "bf73074e-2079-419e-b4cf-eeb96f8e5e70",
+            "updated_at": 1709928807
         }
     }
 }

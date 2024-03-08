@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   cheshire-cat-core:
-    image: ghcr.io/cheshire-cat-ai/core:latest
+    image: ghcr.io/cheshire-cat-ai/core:1.5.1
     container_name: cheshire_cat_core
     depends_on:
       - cheshire-cat-vector-memory
@@ -25,12 +25,10 @@ services:
       - ./cat/static:/app/cat/static
       - ./cat/plugins:/app/cat/plugins
       - ./cat/data:/app/cat/data
-      - ./cat/embedder:/app/local_cache
     restart: unless-stopped
 
-
   cheshire-cat-vector-memory:
-    image: qdrant/qdrant:v1.6.1
+    image: qdrant/qdrant:v1.7.1
     container_name: cheshire_cat_vector_memory
     expose:
       - 6333
@@ -40,7 +38,7 @@ services:
 
   ollama:
     container_name: ollama_cat
-    image: ollama/ollama:0.1.23
+    image: ollama/ollama:0.1.28
     volumes:
       - ./ollama:/root/.ollama
     expose:
@@ -53,9 +51,4 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities: [gpu]
-
-
-
-
-  
+              capabilities: [ gpu ]
