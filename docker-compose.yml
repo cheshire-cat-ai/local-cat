@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   cheshire-cat-core:
-    image: ghcr.io/cheshire-cat-ai/core:1.6.1
+    image: ghcr.io/cheshire-cat-ai/core:1.5.1
     container_name: cheshire_cat_core
     depends_on:
       - cheshire-cat-vector-memory
@@ -38,7 +38,7 @@ services:
 
   ollama:
     container_name: ollama_cat
-    image: ollama/ollama:0.1.33
+    image: ollama/ollama:0.1.28
     volumes:
       - ./ollama:/root/.ollama
     expose:
