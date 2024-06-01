@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   cheshire-cat-core:
-    image: ghcr.io/cheshire-cat-ai/core:1.5.3
+    image: ghcr.io/cheshire-cat-ai/core:1.6.2
     container_name: cheshire_cat_core
     depends_on:
       - cheshire-cat-vector-memory
