@@ -32,8 +32,8 @@ services:
     container_name: cheshire_cat_vector_memory
     environment:
       LOG_LEVEL: ${LOG_LEVEL:-WARNING}
-    ports:
-      - "${QDRANT_PORT:-6333}:6333"
+    expose:
+      - "6333"
     volumes:
       - ./cat/long_term_memory/vector:/qdrant/storage
     restart: unless-stopped
@@ -44,8 +44,11 @@ services:
     environment:
       OLLAMA_FLASH_ATTENTION: ${OLLAMA_FLASH_ATTENTION:-false}
       OLLAMA_DEBUG: ${OLLAMA_DEBUG:-false}
-    ports:
-      - "${OLLAMA_PORT:-11434}:11434"
+      OLLAMA_KEEP_ALIVE: ${OLLAMA_KEEP_ALIVE:-"5m"}
+      OLLAMA_MAX_LOADED_MODELS: ${OLLAMA_MAX_LOADED_MODELS:-1}
+      OLLAMA_NUM_PARALLEL: ${OLLAMA_NUM_PARALLEL:-1}
+    expose:
+      - "11434"
     volumes:
       - ./ollama:/root/.ollama
     deploy:
