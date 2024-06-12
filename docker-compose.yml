@@ -33,7 +33,7 @@ services:
     environment:
       LOG_LEVEL: ${LOG_LEVEL:-WARNING}
     expose:
-      - "6333"
+      - ${QDRANT_PORT:-6333}
     volumes:
       - ./cat/long_term_memory/vector:/qdrant/storage
     restart: unless-stopped
@@ -42,13 +42,14 @@ services:
     image: ollama/ollama:0.1.39
     container_name: ollama_cat
     environment:
-      OLLAMA_FLASH_ATTENTION: ${OLLAMA_FLASH_ATTENTION:-false}
+      OLLAMA_HOST: "${OLLAMA_HOST:-0.0.0.0}:${OLLAMA_PORT-11434}"
       OLLAMA_DEBUG: ${OLLAMA_DEBUG:-false}
+      OLLAMA_FLASH_ATTENTION: ${OLLAMA_FLASH_ATTENTION:-false}
       OLLAMA_KEEP_ALIVE: ${OLLAMA_KEEP_ALIVE:-"5m"}
       OLLAMA_MAX_LOADED_MODELS: ${OLLAMA_MAX_LOADED_MODELS:-1}
       OLLAMA_NUM_PARALLEL: ${OLLAMA_NUM_PARALLEL:-1}
     expose:
-      - "11434"
+      - ${OLLAMA_PORT:-11434}
     volumes:
       - ./ollama:/root/.ollama
     deploy:
