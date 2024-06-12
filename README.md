@@ -1,29 +1,34 @@
-# local-cat
+# local-cat 😸🏠
 
-A ready to use 100% local setup for Cat + Ollama + Embedder + Qdrant
+**local-cat** provides a completely local setup for CheshireCat. Local-cat leverages Ollama + Qdrant to run your preferred LLM, Embedder and VectorDB locally.
 
 > [!WARNING]
 >
-> 1. You need a GPU and tech expertise to run this
-> 2. The setup is english language only
+> - **Technical Expertise Required:** Setting up and running local-cat requires some technical know-how.
+> - **Hardware Requirements:** Performance may be slow without a recent GPU or NPU.
 
-## Double command setup
+## Setup Instructions
 
-1. clone the repo: `git clone https://github.com/cheshire-cat-ai/local-cat.git`
-2. cd `cd local-cat`
-3. Build the cat: `docker-compose up`
-4. Pull the desired model from ollama library: `docker exec ollama_cat ollama pull <model_name:tags>`
+1. **Clone the Repository:** `git clone https://github.com/cheshire-cat-ai/local-cat.git`
+2. **Navigate to the Directory:** `cd local-cat`
+3. **Start local-cat:** `docker-compose up -d`
+4. **Pull Your Desired Model:** `docker exec ollama_cat ollama pull <model_name:tag>`
+   - Replace `<model_name:tag>` with the specific model you want to use.
+5. **Configure LLM Settings:**
+   - Access the admin dashboard and open the LLM settings.
+      > Note: If you are running the local-cat on the same machine, you can reach the dashboard at https://localhost:1865/admin 
+   - Select Ollama as your LLM provider.
+      > Note: You could also select another provider but be aware you will have to fill in different fields.
+   - Enter `http://ollama_cat:11434` as the Base URL.
+   - Input in the Model field the exact `model_name:tag` pulled earlier in Ollama. E.g. `mistral:instruct`
+     > Note: You could list the downloaded models using `docker exec ollama_cat ollama list`
+   - Confirm by hitting save and wait for the changes to apply.
+6. **Configure Embedder Settings:**
+   - Access the admin dashboard and open the Embedder settings.
+   - Select the local Qdrant FastEmbed as your Embedder provider.
+     > Note: You could also select another provider but be aware you will have to fill in different fields.
+   - Choose an embedder suitable for your needs, like `BAAI/bge-large-en-v1.5-quantized` for English or `intfloat/multilingual-e5-large` for multilingual capabilities.
+   - Save your settings and allow some time for saving changes and for any necessary downloads.
+7. **Your Setup is Complete!**
+   - You can now install additional plugins or start interacting with local-cat.
 
----
-
-### Steps
-
-1. double command setup ✅
-   1. create the docker compose
-   2. setup core image and volumes
-      1. volumes: static, public, plugins, metadata.json
-      2. connect to Qdrant container
-   3. embedder CPU based, bg-small-en-v1.5
-   4. ollama GPU based
-2. one command setup
-   1. self-download the LLM (somehow)
