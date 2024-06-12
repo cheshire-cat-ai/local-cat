@@ -23,12 +23,14 @@
    - Input in the Model field the exact `model_name:tag` pulled earlier in Ollama. E.g. `mistral:instruct`
      > Note: You could list the downloaded models using `docker exec ollama_cat ollama list`
    - Confirm by hitting save and wait for the changes to apply.
+   ![LLM example settings](./assets/settings_example_LLM.png?raw=true)
 6. **Configure Embedder Settings:**
    - Access the admin dashboard and open the Embedder settings.
    - Select the local Qdrant FastEmbed as your Embedder provider.
      > Note: You could also select another provider but be aware you will have to fill in different fields.
    - Choose an embedder suitable for your needs, like `BAAI/bge-large-en-v1.5-quantized` for English or `intfloat/multilingual-e5-large` for multilingual capabilities.
    - Save your settings and allow some time for saving changes and for any necessary downloads.
+   ![Embedder example settings](./assets/settings_example_Embedder.png?raw=true)
 7. **Your Setup is Complete!**
    - You can now install additional plugins or start interacting with local-cat.
 
