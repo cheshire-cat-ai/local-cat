@@ -21,6 +21,8 @@ services:
       SAVE_MEMORY_SNAPSHOTS: ${SAVE_MEMORY_SNAPSHOTS:-false}
     ports:
       - "${CORE_PORT:-1865}:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # This add an entry to /etc/hosts file in the container mapping host.docker.internal to the host machine IP addr, allowing the container to access services running on the host, not only on Win and Mac but also Linux. See https://docs.docker.com/desktop/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host and https://docs.docker.com/reference/cli/docker/container/run/#add-host
     volumes:
       - ./cat/static:/app/cat/static
       - ./cat/plugins:/app/cat/plugins
