@@ -35,6 +35,11 @@
 
 ## Use Ollama with MacOS GPU Acceleration
 
-Ollama normally handles running the model with GPU acceleration. In order to use GPU acceleration on Mac OS it is recommended to run Ollama alongside Docker Desktop. More info [here](https://ollama.com/blog/ollama-is-now-available-as-an-official-docker-image).
-This mean that to use local-cat you have to install the classic (and recommended) menu bar app version of Ollama and run a multi-container docker application that run only the cat-code and qdrant containers.
-To do this use the file `docker-compose-macos.yml` for running the local cat and point in cat LLM settings the Ollama Base URL to `http://host.docker.internal:11434`. This will allow docker's containers to send requests to your local ollama service while enjoying the GPU acceleration.
+Ollama normally handles running the model with GPU acceleration. In order to use GPU acceleration on Mac OS it is recommended to run Ollama directly on the host machine rather than inside Docker. More info [here](https://ollama.com/blog/ollama-is-now-available-as-an-official-docker-image).
+> Note: This is recommended until GPU acceleration is supported by Docker Desktop on MacOS.
+
+To use local-cat with GPU acceleration on Mac:
+- Install the menu bar app version of Ollama, which is the current recommended setup for MacOS users.
+- Use the `docker-compose-macos.yml` to start local-cat, running only cheshire_cat_core and cheshire_cat_vector_memory containers.
+- Configure the Ollama Base URL in the cat's LLM settings to `http://host.docker.internal:11434`. 
+> Note: This configuration allows Docker containers to communicate with your locally running Ollama service and leverage MacOS GPU acceleration.
