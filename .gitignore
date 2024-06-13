@@ -4,6 +4,6 @@ __pycache__/
 *$py.class
 
 
-/cat/*
+/cat/**
 /ollama/*
 .env
