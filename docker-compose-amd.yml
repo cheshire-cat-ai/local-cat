@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   cheshire-cat-core:
     image: ghcr.io/cheshire-cat-ai/core:1.6.2
@@ -40,8 +38,10 @@ services:
     container_name: ollama_cat
     image: ollama/ollama:0.1.39-rocm
     device:
-      - "/dev/kfd:/dev/kfd"
-      - "/dev/dri:/dev/dri"
+      - /dev/fdk
+      - /dev/dri
+    security_opt:
+      - seccomp:unconfined
     volumes:
       - ./ollama:/root/.ollama
     expose:
