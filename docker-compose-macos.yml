@@ -1,0 +1,36 @@
+services:
+  cheshire-cat-core:
+    image: ghcr.io/cheshire-cat-ai/core:1.6.2
+    container_name: cheshire_cat_core
+    depends_on:
+      - cheshire-cat-vector-memory
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WATCHFILES_FORCE_POLLING=true
+      - CORE_HOST=${CORE_HOST:-localhost}
+      - CORE_PORT=${CORE_PORT:-1865}
+      - QDRANT_HOST=${QDRANT_HOST:-cheshire_cat_vector_memory}
+      - QDRANT_PORT=${QDRANT_PORT:-6333}
+      - CORE_USE_SECURE_PROTOCOLS=${CORE_USE_SECURE_PROTOCOLS:-}
+      - API_KEY=${API_KEY:-}
+      - LOG_LEVEL=${LOG_LEVEL:-WARNING}
+      - DEBUG=${DEBUG:-true}
+      - SAVE_MEMORY_SNAPSHOTS=${SAVE_MEMORY_SNAPSHOTS:-false}
+    ports:
+      - ${CORE_PORT:-1865}:80
+    volumes:
+      - ./cat/static:/app/cat/static
+      - ./cat/plugins:/app/cat/plugins
+      - ./cat/data:/app/cat/data
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  cheshire-cat-vector-memory:
+    image: qdrant/qdrant:v1.9.1
+    container_name: cheshire_cat_vector_memory
+    expose:
+      - 6333
+    volumes:
+      - ./cat/long_term_memory/vector:/qdrant/storage
+    restart: unless-stopped
