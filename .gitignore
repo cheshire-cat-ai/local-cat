@@ -7,3 +7,4 @@ __pycache__/
 /cat/**
 /ollama/*
 .env
+petals-cache
