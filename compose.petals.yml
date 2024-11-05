@@ -3,6 +3,8 @@ services:
     container_name: cheshire_cat_core
     build:
       context: ./core/core
+    depends_on:
+      - cheshire-cat-vector-memory
     environment:
       PYTHONUNBUFFERED: "1"
       WATCHFILES_FORCE_POLLING: "true"
@@ -24,14 +26,9 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - ./core/core:/app
       - ./cat/static:/app/cat/static
       - ./cat/plugins:/app/cat/plugins
       - ./cat/data:/app/cat/data
-    command:
-      - python
-      - "-m"
-      - "cat.main"
     restart: unless-stopped
 
   cheshire-cat-vector-memory:
