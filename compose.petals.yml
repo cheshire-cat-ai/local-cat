@@ -1,10 +1,8 @@
 services:
   cheshire-cat-core:
-    image: ghcr.io/cheshire-cat-ai/core:1.6.2
     container_name: cheshire_cat_core
-    depends_on:
-      - cheshire-cat-vector-memory
-      - ollama
+    build:
+      context: ./core/core
     environment:
       PYTHONUNBUFFERED: "1"
       WATCHFILES_FORCE_POLLING: "true"
@@ -17,6 +15,8 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-WARNING}
       DEBUG: ${DEBUG:-false}
       SAVE_MEMORY_SNAPSHOTS: ${SAVE_MEMORY_SNAPSHOTS:-false}
+      HUGGINGFACE_TOKEN: ${HUGGINGFACE_TOKEN:-}
+    #we need DEBUG=false otherwise watcher will interfer with Petals and Hivemind
     ports:
       - "${CORE_PORT:-1865}:80"
     # This add an entry to /etc/hosts file in the container mapping host.docker.internal to the host machine IP addr, allowing the container to access services running on the host, not only on Win and Mac but also Linux. 
@@ -24,9 +24,14 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
+      - ./core/core:/app
       - ./cat/static:/app/cat/static
       - ./cat/plugins:/app/cat/plugins
       - ./cat/data:/app/cat/data
+    command:
+      - python
+      - "-m"
+      - "cat.main"
     restart: unless-stopped
 
   cheshire-cat-vector-memory:
@@ -40,21 +45,29 @@ services:
       - ./cat/long_term_memory/vector:/qdrant/storage
     restart: unless-stopped
 
-  ollama:
-    image: ollama/ollama:0.1.39
-    container_name: ollama_cat
-    restart: unless-stopped
-    environment:
-      OLLAMA_HOST: "${OLLAMA_HOST:-0.0.0.0}:${OLLAMA_PORT-11434}"
-      OLLAMA_DEBUG: ${OLLAMA_DEBUG:-false}
-      OLLAMA_FLASH_ATTENTION: ${OLLAMA_FLASH_ATTENTION:-false}
-      OLLAMA_KEEP_ALIVE: ${OLLAMA_KEEP_ALIVE:-"5m"}
-      OLLAMA_MAX_LOADED_MODELS: ${OLLAMA_MAX_LOADED_MODELS:-1}
-      OLLAMA_NUM_PARALLEL: ${OLLAMA_NUM_PARALLEL:-1}
-    expose:
-      - ${OLLAMA_PORT:-11434}
+  petals:
+    image: learningathome/petals:main
+    container_name: petals
+    command: 
+      - /bin/bash
+      - -c
+      - |
+        set -e
+        huggingface-cli login --token $HUGGINGFACE_TOKEN --add-to-git-credential
+        python -m petals.cli.run_server \
+        --public_name ${PUBLIC_NAME:-cheshirecat_user} \
+        --port 31330 \
+        --balance_quality 0.2 \
+        --num_blocks ${PETAL_NUM_BLOCKS:-36} \
+        --max_disk_space ${PETAL_MAX_DISK_SPACE:-30GB} \
+        ${PETAL_MODEL_NAME:-codellama/CodeLlama-7b-Instruct-hf}
+    #    ${PETAL_MODEL_NAME:-bigscience/bloom-560m}
+    #    ${PETAL_MODEL_NAME:-meta-llama/Meta-Llama-3.1-405B-Instruct}
+    ipc: host
+    ports:
+      - 31330:31330
     volumes:
-      - ./ollama:/root/.ollama
+      - ./petals-cache:/cache
     deploy:
       resources:
         reservations:

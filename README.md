@@ -37,7 +37,7 @@ To run local-cat with Petals, follow these steps:
 1. fill .env file with the desired settings
 2. clone cheshire-cat-ai/core repository from [here](https://github.com/scicco/core/tree/features/petals) (the branch is `features/petals`)
   `git clone --branch features/petals https://github.com/scicco/core.git`
-3. run `docker-compose up -d`
+3. run `docker compose -f compose.petals.yml up -d`
 
 ### Petals container setup
 1. The Petals container should start. Inside log you will see that is loading model blocks. 
