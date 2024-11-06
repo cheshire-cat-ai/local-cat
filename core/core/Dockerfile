@@ -12,9 +12,6 @@ RUN apt-get -y update && apt-get install -y curl build-essential fastjar libmagi
 ### PREPARE BUILD WITH NECESSARY FILES AND FOLDERS ###
 COPY ./pyproject.toml /app/pyproject.toml
 
-### override default llm.py to add another LLM configuration for Petals
-COPY ./cat/factory/llm.py /app/cat/factory/llm.py
-
 ### INSTALL PYTHON DEPENDENCIES (Core) ###
 WORKDIR /app
 RUN pip install -U pip && \
