@@ -2,7 +2,7 @@ services:
   cheshire-cat-core:
     container_name: cheshire_cat_core
     build:
-      context: ./core/core
+      context: ./docker
     depends_on:
       - cheshire-cat-vector-memory
     environment:
