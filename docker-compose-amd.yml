@@ -37,8 +37,8 @@ services:
   ollama:
     container_name: ollama_cat
     image: ollama/ollama:0.1.39-rocm
-    device:
-      - /dev/fdk
+    devices:
+      - /dev/kfd
       - /dev/dri
     security_opt:
       - seccomp:unconfined
